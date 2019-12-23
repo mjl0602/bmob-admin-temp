@@ -1,0 +1,41 @@
+{
+  "avatar": {
+    "type": "image",
+    "formType": "file",
+    "defaultValue": "'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif'",
+    "description": "头像"
+  },
+  "name": {
+    "property": "width='100'",
+    "defaultValue": "'管理员'",
+    "description": "名称"
+  },
+  "introduction": {
+    "property": "min-width='300'",
+    "defaultValue": "''",
+    "description": "描述"
+  },
+  "account": "用户名",
+  "password": {
+    "property": "width='200' v-if='false'",
+    "type": "string",
+    "formType": "string",
+    "submitType": "string",
+    "defaultValue": "''",
+    "description": "密码"
+  },
+  "roles": {
+    "property": "width='300'",
+    "type": "tagArray",
+    "formType": "stringArray",
+    "defaultValue": "['superadmin']",
+    "description": "权限"
+  },
+  "disable": {
+    "type": "bool",
+    "formType": "bool",
+    "submitType": "bool",
+    "defaultValue": "true",
+    "description": "封禁"
+  }
+}
