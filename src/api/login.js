@@ -13,7 +13,7 @@ const userMap = {
     avatar:
       "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif",
     // 名字
-    name: "Super Admin",
+    name: "Super Admin"
   },
   editor: {
     roles: ["editor"],
@@ -21,8 +21,8 @@ const userMap = {
     introduction: "我是编辑",
     avatar:
       "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif",
-    name: "Normal Editor",
-  },
+    name: "Normal Editor"
+  }
 };
 
 let fakeUser = new Promise((resolve, reject) => {
@@ -34,20 +34,20 @@ let userInfo = {
   token: "editor",
   introduction: "我是编辑",
   avatar: "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif",
-  name: "Normal Editor",
+  name: "Normal Editor"
 };
 
 export function logout() {
   return request({
     url: "/user/logout",
-    method: "post",
+    method: "post"
   });
 }
 
 export async function loginByUsername(username, password) {
   console.log("loginByUsername adminLogin", {
     email: username,
-    password: password,
+    password: password
   });
 
   let query = Bmob.Query("admin");
@@ -69,11 +69,16 @@ export async function getUserInfo(token) {
     console.log("无token,return null");
     return null;
   }
-  let user = await query.get(token);
-  console.log("从id获取userinfo", token, user);
-  if (user.disable) {
-    throw "用户无权登录";
+  try {
+    let user = await query.get(token);
+    console.log("从id获取userinfo", token, user);
+    if (user.disable) {
+      throw "用户无权登录";
+    }
+  } catch (error) {
+    throw "用户不存在";
   }
+
   return userforBmob(user);
 }
 
@@ -90,6 +95,6 @@ function userforBmob(bmobObject) {
       bmobObject.avatar ||
       "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif",
     // 名字
-    name: bmobObject.name,
+    name: bmobObject.name
   };
 }
