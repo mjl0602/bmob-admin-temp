@@ -69,17 +69,17 @@ export async function getUserInfo(token) {
     console.log("无token,return null");
     return null;
   }
+  console.log(112312321);
   try {
     let user = await query.get(token);
     console.log("从id获取userinfo", token, user);
     if (user.disable) {
       throw "用户无权登录";
     }
+    return userforBmob(user);
   } catch (error) {
     throw "用户不存在";
   }
-
-  return userforBmob(user);
 }
 
 function userforBmob(bmobObject) {

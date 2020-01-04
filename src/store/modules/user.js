@@ -12,8 +12,8 @@ const user = {
     introduction: "",
     roles: [],
     setting: {
-      articlePlatform: [],
-    },
+      articlePlatform: []
+    }
   },
 
   mutations: {
@@ -40,7 +40,7 @@ const user = {
     },
     SET_ROLES: (state, roles) => {
       state.roles = roles;
-    },
+    }
   },
 
   actions: {
@@ -70,27 +70,26 @@ const user = {
     GetUserInfo({ commit, state }) {
       console.log("GetUserInfo state", state);
       return new Promise((resolve, reject) => {
+        console.log("getUserInfo Promise");
         getUserInfo(state.token)
           .then(response => {
-            // if (!response.data) { // 由于mockjs 不支持自定义状态码只能这样hack
-            //   reject('error')
-            // }
-            const data = response;
+            const userinfo = response;
 
-            console.log("GetUserInfo", data);
-            if (data.roles && data.roles.length > 0) {
+            console.log("GetUserInfo userinfo:", userinfo);
+            if (userinfo.roles && userinfo.roles.length > 0) {
               // 验证返回的roles是否是一个非空数组
-              commit("SET_ROLES", data.roles);
+              commit("SET_ROLES", userinfo.roles);
             } else {
               reject("getInfo: roles must be a non-null array !");
             }
 
-            commit("SET_NAME", data.name);
-            commit("SET_AVATAR", data.avatar);
-            commit("SET_INTRODUCTION", data.introduction);
-            resolve(data);
+            commit("SET_NAME", userinfo.name);
+            commit("SET_AVATAR", userinfo.avatar);
+            commit("SET_INTRODUCTION", userinfo.introduction);
+            resolve(userinfo);
           })
           .catch(error => {
+            console.error("get userinfo error", error);
             reject(error);
           });
       });
@@ -148,8 +147,8 @@ const user = {
           resolve();
         });
       });
-    },
-  },
+    }
+  }
 };
 
 export default user;
