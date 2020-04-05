@@ -4,7 +4,7 @@ module.exports = {
   // BASE_API: '',
   TITLE: '"管理系统"',
   BMOB: {
-    appid: '"aaa"',
-    key: '"aaa"'
-  }
+    appid: '"TODO:APP_ID"',
+    key: '"TODO:SECRECT_KEY"',
+  },
 }
