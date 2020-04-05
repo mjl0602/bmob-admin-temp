@@ -4,20 +4,20 @@ export default {
   computed: {
     dialogTitle() {
       return (this.isNew ? "新增" : "修改") + this.objStr;
-    }
+    },
   },
   filters: {},
   data() {
     return {
       // 表格内容
-      
+
       objStr: "#对象#",
       list: [],
       listLoading: true,
       query: {
         total: 0,
         pageSize: 5,
-        page: 1
+        page: 1,
       },
       // 添加的Dialog
       addDialogVisible: false,
@@ -32,7 +32,7 @@ export default {
             text: "今天",
             onClick(picker) {
               picker.$emit("pick", new Date());
-            }
+            },
           },
           {
             text: "昨天",
@@ -40,7 +40,7 @@ export default {
               const date = new Date();
               date.setTime(date.getTime() - 3600 * 1000 * 24);
               picker.$emit("pick", date);
-            }
+            },
           },
           {
             text: "一周前",
@@ -48,10 +48,10 @@ export default {
               const date = new Date();
               date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
               picker.$emit("pick", date);
-            }
-          }
-        ]
-      }
+            },
+          },
+        ],
+      },
     };
   },
   created() {
@@ -118,7 +118,7 @@ export default {
       await this.$confirm("删除操作将不能撤销, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
-        type: "error"
+        type: "error",
       });
       await this.source.deleteObj(row);
       this.notifySuccess("删除成功", `${this.objStr}已被删除`);
@@ -144,7 +144,7 @@ export default {
         title: title,
         message: detail,
         type: "error",
-        duration: 2000
+        duration: 2000,
       });
     },
     notifyWarning(title, detail) {
@@ -152,7 +152,7 @@ export default {
         title: title,
         message: detail,
         type: "warning",
-        duration: 2000
+        duration: 2000,
       });
     },
     notifySuccess(title, detail) {
@@ -160,7 +160,7 @@ export default {
         title: title,
         message: detail,
         type: "success",
-        duration: 2000
+        duration: 2000,
       });
     },
 
@@ -169,14 +169,20 @@ export default {
         title: "等待开发",
         message: "需要后台接口",
         type: "warning",
-        duration: 2000
+        duration: 2000,
       });
     },
-
+    delay(timeout) {
+      return new Promise((r, e) => {
+        setTimeout(() => {
+          r();
+        }, timeout);
+      });
+    },
     fakePromise() {
       return new Promise((r, e) => {
         r();
       });
-    }
-  }
+    },
+  },
 };
