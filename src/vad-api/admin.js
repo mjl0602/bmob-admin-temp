@@ -7,38 +7,37 @@ var tableName = "admin";
 export default class DataSource extends Source {
   // 默认的内容
   defaultObject = {
-    avatar:'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
-    
-name:'管理员',
-    
-introduction:'',
-    
-account:"",
-    
-password:'',
-    
-roles:['superadmin'],
-    
-disable:true,
-    
+    avatar:
+      "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif",
+
+    name: "管理员",
+
+    introduction: "",
+
+    account: "",
+
+    password: "",
+
+    roles: ["superadmin"],
+
+    disable: true
   };
 
   // 表单规则
   rules = {
-    avatar:[{ required: true, message: "必填", trigger: "blur" }],
-    
-name:[{ required: true, message: "必填", trigger: "blur" }],
-    
-introduction:[{ required: true, message: "必填", trigger: "blur" }],
-    
-account:[{ required: true, message: "必填", trigger: "blur" }],
-    
-password:[{ required: true, message: "必填", trigger: "blur" }],
-    
-roles:[{ required: true, message: "必填", trigger: "blur" }],
-    
-disable:[{ required: true, message: "必填", trigger: "blur" }],
-    
+    avatar: [{ required: true, message: "必填", trigger: "blur" }],
+
+    name: [{ required: true, message: "必填", trigger: "blur" }],
+
+    introduction: [{ required: true, message: "必填", trigger: "blur" }],
+
+    account: [{ required: true, message: "必填", trigger: "blur" }],
+
+    password: [{ required: true, message: "必填", trigger: "blur" }],
+
+    roles: [{ required: true, message: "必填", trigger: "blur" }],
+
+    disable: [{ required: true, message: "必填", trigger: "blur" }]
   };
   /**
    * 【查询全部】
@@ -59,7 +58,7 @@ disable:[{ required: true, message: "必填", trigger: "blur" }],
     let list = await query.find();
     return {
       total: count,
-      data: list,
+      data: list
     };
   }
 
@@ -80,19 +79,19 @@ disable:[{ required: true, message: "必填", trigger: "blur" }],
 
   // 修改对象
   buildObj(res, obj) {
-    res.set("avatar", obj.avatar)
+    res.set("avatar", obj.avatar);
 
-res.set("name", obj.name)
+    res.set("name", obj.name);
 
-res.set("introduction", obj.introduction)
+    res.set("introduction", obj.introduction);
 
-res.set("account", obj.account)
+    res.set("account", obj.account);
 
-res.set("password", obj.password)
+    res.set("password", obj.password);
 
-res.set("roles", obj.roles)
+    res.set("roles", obj.roles);
 
-res.set("disable", !!obj.disable)
+    res.set("disable", !!obj.disable);
 
     return res;
   }

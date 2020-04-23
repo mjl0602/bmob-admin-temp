@@ -7,22 +7,20 @@ var tableName = "order";
 export default class DataSource extends Source {
   // 默认的内容
   defaultObject = {
-    flow:"",
-    
-price:"",
-    
-address:"",
-    
+    flow: "",
+
+    price: "",
+
+    address: ""
   };
 
   // 表单规则
   rules = {
-    flow:[{ required: true, message: "必填", trigger: "blur" }],
-    
-price:[{ required: true, message: "必填", trigger: "blur" }],
-    
-address:[{ required: true, message: "必填", trigger: "blur" }],
-    
+    flow: [{ required: true, message: "必填", trigger: "blur" }],
+
+    price: [{ required: true, message: "必填", trigger: "blur" }],
+
+    address: [{ required: true, message: "必填", trigger: "blur" }]
   };
   /**
    * 【查询全部】
@@ -43,7 +41,7 @@ address:[{ required: true, message: "必填", trigger: "blur" }],
     let list = await query.find();
     return {
       total: count,
-      data: list,
+      data: list
     };
   }
 
@@ -64,11 +62,11 @@ address:[{ required: true, message: "必填", trigger: "blur" }],
 
   // 修改对象
   buildObj(res, obj) {
-    res.set("flow", obj.flow)
+    res.set("flow", obj.flow);
 
-res.set("price", obj.price)
+    res.set("price", obj.price);
 
-res.set("address", obj.address)
+    res.set("address", obj.address);
 
     return res;
   }

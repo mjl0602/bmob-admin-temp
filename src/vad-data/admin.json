@@ -35,7 +35,7 @@
     "type": "bool",
     "formType": "bool",
     "submitType": "bool",
-    "defaultValue": "true",
+    "defaultValue": "false",
     "description": "封禁"
   }
 }

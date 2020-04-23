@@ -1,53 +1,58 @@
 <template>
   <div class="navbar">
-    <hamburger :toggle-click="toggleSideBar" :is-active="sidebar.opened" class="hamburger-container"/>
+    <hamburger
+      :toggle-click="toggleSideBar"
+      :is-active="sidebar.opened"
+      class="hamburger-container"
+    />
 
-    <breadcrumb class="breadcrumb-container"/>
+    <breadcrumb class="breadcrumb-container" />
 
     <div class="right-menu">
       <template v-if="device!=='mobile'">
         <!-- <error-log class="errLog-container right-menu-item"/> -->
 
         <el-tooltip :content="$t('navbar.screenfull')" effect="dark" placement="bottom">
-          <screenfull class="screenfull right-menu-item"/>
+          <screenfull class="screenfull right-menu-item" />
         </el-tooltip>
 
         <el-tooltip :content="$t('navbar.size')" effect="dark" placement="bottom">
-          <size-select class="international right-menu-item"/>
+          <size-select class="international right-menu-item" />
         </el-tooltip>
 
         <el-tooltip content="刷新" effect="dark" placement="bottom">
-          <i class="screenfull right-menu-item el-icon-refresh" style="font-size:26px;vertical-align:10px;color:#000000;" @click="refresh"></i>
+          <i
+            class="screenfull right-menu-item el-icon-refresh"
+            style="font-size:26px;vertical-align:10px;color:#000000;"
+            @click="refresh"
+          ></i>
         </el-tooltip>
 
         <!-- <lang-select class="international right-menu-item"/> -->
 
         <el-tooltip :content="$t('navbar.theme')" effect="dark" placement="bottom">
-          <theme-picker class="theme-switch right-menu-item"/>
+          <theme-picker class="theme-switch right-menu-item" />
         </el-tooltip>
 
-        <el-tooltip content="当前登录用户" effect="dark" placement="bottom">
-          <div class="international right-menu-item" style="font-size:14px;">{{this.username}}</div>
+        <el-tooltip :content="this.user.introduction" effect="dark" placement="bottom">
+          <div class="international right-menu-item" style="font-size:14px;">{{this.user.name}}</div>
         </el-tooltip>
-
       </template>
 
       <el-dropdown class="avatar-container right-menu-item" trigger="click">
         <div class="avatar-wrapper">
-          <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
-          <i class="el-icon-caret-bottom"/>
+          <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar" />
+          <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown">
-           <router-link to="/">
-            <el-dropdown-item>
-              {{ $t('navbar.dashboard') }}
-            </el-dropdown-item>
+          <router-link to="/">
+            <el-dropdown-item>{{ $t('navbar.dashboard') }}</el-dropdown-item>
           </router-link>
           <!-- <a target="_blank" href="https://github.com/PanJiaChen/vue-element-admin/">
             <el-dropdown-item>
               {{ $t('navbar.github') }}
             </el-dropdown-item>
-          </a> -->
+          </a>-->
           <el-dropdown-item divided>
             <span style="display:block;" @click="logout">{{ $t('navbar.logOut') }}</span>
           </el-dropdown-item>
@@ -58,17 +63,17 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import Breadcrumb from '@/components/Breadcrumb'
-import Hamburger from '@/components/Hamburger'
-import ErrorLog from '@/components/ErrorLog'
-import Screenfull from '@/components/Screenfull'
-import SizeSelect from '@/components/SizeSelect'
-import LangSelect from '@/components/LangSelect'
-import ThemePicker from '@/components/ThemePicker'
+import { mapGetters } from "vuex";
+import Breadcrumb from "@/components/Breadcrumb";
+import Hamburger from "@/components/Hamburger";
+import ErrorLog from "@/components/ErrorLog";
+import Screenfull from "@/components/Screenfull";
+import SizeSelect from "@/components/SizeSelect";
+import LangSelect from "@/components/LangSelect";
+import ThemePicker from "@/components/ThemePicker";
 
 export default {
-  inject:['reload'],
+  inject: ["reload"],
   components: {
     Breadcrumb,
     Hamburger,
@@ -79,35 +84,27 @@ export default {
     ThemePicker
   },
   computed: {
-    ...mapGetters([
-      'sidebar',
-      'name',
-      'avatar',
-      'device'
-    ])
+    ...mapGetters(["sidebar", "name", "avatar", "device"])
   },
-  data(){
+  data() {
     return {
-      username:this.$store.state.user.name
-    }
+      user: this.$store.state.user
+    };
   },
   methods: {
-    refresh(){
-      // location.reload();
-      // console.log(this.$router);
-      // this.$router.push({ path: this.$router.history.current.fullPath, query: {} });
+    refresh() {
       this.reload();
     },
     toggleSideBar() {
-      this.$store.dispatch('toggleSideBar')
+      this.$store.dispatch("toggleSideBar");
     },
     logout() {
-      this.$store.dispatch('LogOut').then(() => {
-        location.reload()// In order to re-instantiate the vue-router object to avoid bugs
-      })
+      this.$store.dispatch("LogOut").then(() => {
+        location.reload(); // In order to re-instantiate the vue-router object to avoid bugs
+      });
     }
   }
-}
+};
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
@@ -121,7 +118,7 @@ export default {
     float: left;
     padding: 0 10px;
   }
-  .breadcrumb-container{
+  .breadcrumb-container {
     float: left;
   }
   .errLog-container {
@@ -131,8 +128,8 @@ export default {
   .right-menu {
     float: right;
     height: 100%;
-    &:focus{
-     outline: none;
+    &:focus {
+      outline: none;
     }
     .right-menu-item {
       display: inline-block;
@@ -141,7 +138,7 @@ export default {
     .screenfull {
       height: 20px;
     }
-    .international{
+    .international {
       vertical-align: top;
     }
     .theme-switch {
