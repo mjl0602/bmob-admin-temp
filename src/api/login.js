@@ -59,6 +59,7 @@ export async function loginByUsername(username, password) {
   if (users.length > 0) {
     return userforBmob(users[0]);
   } else {
+    console.log("找不到这个用户:" + username);
     return false;
   }
 }
@@ -69,7 +70,6 @@ export async function getUserInfo(token) {
     console.log("无token,return null");
     return null;
   }
-  console.log(112312321);
   try {
     let user = await query.get(token);
     console.log("从id获取userinfo", token, user);
