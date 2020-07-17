@@ -12,55 +12,47 @@
       highlight-current-row
     >
       <!-- 内容 -->
-          <el-table-column label="头像" align="center" >
-      <template slot-scope="scope">
-        <img style="height:66px;" :src="scope.row.avatar">
-      </template>
-    </el-table-column>
-    
-    <el-table-column label="名称" align="center" width='100'>
-      <template slot-scope="scope">
-        {{scope.row.name}}
-      </template>
-    </el-table-column>
-    
-    <el-table-column label="描述" align="center" min-width='300'>
-      <template slot-scope="scope">
-        {{scope.row.introduction}}
-      </template>
-    </el-table-column>
-    
-    <el-table-column label="用户名" align="center" >
-      <template slot-scope="scope">
-        {{scope.row.account}}
-      </template>
-    </el-table-column>
-    
-    <el-table-column label="密码" align="center" width='200' v-if='false'>
-      <template slot-scope="scope">
-        {{scope.row.password}}
-      </template>
-    </el-table-column>
-    
-    <el-table-column label="权限" align="center" width='300'>
-      <template slot-scope="scope">
-        <div v-for="text in scope.row.roles" style="margin:4px;">
-          <el-tag>{{text}}</el-tag>
-        </div>
-      </template>
-    </el-table-column>
-    
-    <el-table-column label="封禁" align="center" >
-      <template slot-scope="scope">
-        <el-switch
-          disabled
-          v-model="scope.row.disable"
-          active-color="#13ce66"
-          inactive-color="#9b9b9b">
-        </el-switch>
-      </template>
-    </el-table-column>
-    
+      <el-table-column label="头像" align="center">
+        <template slot-scope="scope">
+          <img style="height:66px;" :src="scope.row.avatar" />
+        </template>
+      </el-table-column>
+
+      <el-table-column label="名称" align="center" width="100">
+        <template slot-scope="scope">{{scope.row.name}}</template>
+      </el-table-column>
+
+      <el-table-column label="描述" align="center" min-width="300">
+        <template slot-scope="scope">{{scope.row.introduction}}</template>
+      </el-table-column>
+
+      <el-table-column label="用户名" align="center">
+        <template slot-scope="scope">{{scope.row.account}}</template>
+      </el-table-column>
+
+      <el-table-column label="密码" align="center" width="200" v-if="false">
+        <template slot-scope="scope">{{scope.row.password}}</template>
+      </el-table-column>
+
+      <el-table-column label="权限" align="center" width="300">
+        <template slot-scope="scope">
+          <div v-for="text in scope.row.roles" style="margin:4px;">
+            <el-tag>{{text}}</el-tag>
+          </div>
+        </template>
+      </el-table-column>
+
+      <el-table-column label="封禁" align="center">
+        <template slot-scope="scope">
+          <el-switch
+            disabled
+            v-model="scope.row.disable"
+            active-color="#13ce66"
+            inactive-color="#9b9b9b"
+          ></el-switch>
+        </template>
+      </el-table-column>
+
       <!-- 操作 -->
       <el-table-column class-name="status-col" label="操作" align="center" width="220">
         <template slot-scope="scope">
@@ -92,49 +84,39 @@
         label-width="100px"
         style="width: 400px; margin-left:50px;"
       >
-            <el-form-item label="头像" prop="avatar">
-          <el-input v-model="row.avatar" placeHolder="请输入头像"/>
-      
-    </el-form-item>
-    
-    <el-form-item label="名称" prop="name">
-          <el-input v-model="row.name" placeHolder="请输入名称"/>
-      
-    </el-form-item>
-    
-    <el-form-item label="描述" prop="introduction">
-          <el-input v-model="row.introduction" placeHolder="请输入描述"/>
-      
-    </el-form-item>
-    
-    <el-form-item label="用户名" prop="account">
-          <el-input v-model="row.account" placeHolder="请输入用户名"/>
-      
-    </el-form-item>
-    
-    <el-form-item label="密码" prop="password">
-          <el-input v-model="row.password" placeHolder="请输入密码"/>
-      
-    </el-form-item>
-    
-    <el-form-item label="权限" prop="roles">
+        <el-form-item label="头像" prop="avatar">
+          <el-input v-model="row.avatar" placeholder="请输入头像" />
+        </el-form-item>
+
+        <el-form-item label="名称" prop="name">
+          <el-input v-model="row.name" placeholder="请输入名称" />
+        </el-form-item>
+
+        <el-form-item label="描述" prop="introduction">
+          <el-input v-model="row.introduction" placeholder="请输入描述" />
+        </el-form-item>
+
+        <el-form-item label="用户名" prop="account">
+          <el-input v-model="row.account" placeholder="请输入用户名" />
+        </el-form-item>
+
+        <el-form-item label="密码" prop="password">
+          <el-input v-if="isNew" v-model="row.password" placeholder="请输入密码" />
+          <div v-if="!isNew" style="color:#9b9b9b;">若要修改密码，请删除账户，然后创建新的管理员</div>
+        </el-form-item>
+
+        <el-form-item label="权限" prop="role">
           <el-checkbox-group v-model="row.roles" style="width:0px;">
-      <el-checkbox label="superadmin" key="superadmin" style="margin:0;"></el-checkbox>
-      <el-checkbox label="admin" key="admin" style="margin:0;"></el-checkbox>
-      <el-checkbox label="editor" key="editor" style="margin:0;"></el-checkbox>
-    </el-checkbox-group>
-          
-    </el-form-item>
-    
-    <el-form-item label="封禁" prop="disable">
-          <el-switch
-      v-model="row.disable"
-      active-color="#13ce66"
-      inactive-color="#9b9b9b">
-    </el-switch>
-        
-    </el-form-item>
-    
+            <el-checkbox label="superadmin" key="superadmin" style="margin:0;"></el-checkbox>
+            <el-checkbox label="admin" key="admin" style="margin:0;"></el-checkbox>
+            <el-checkbox label="editor" key="editor" style="margin:0;"></el-checkbox>
+          </el-checkbox-group>
+          <div v-if="!isNew" style="color:#9b9b9b;">若要修改权限，请删除账户，然后创建新的管理员</div>
+        </el-form-item>
+
+        <el-form-item label="封禁" prop="disable">
+          <el-switch v-model="row.disable" active-color="#13ce66" inactive-color="#9b9b9b"></el-switch>
+        </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submit">提交</el-button>

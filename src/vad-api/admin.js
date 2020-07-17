@@ -20,7 +20,7 @@ export default class DataSource extends Source {
 
     roles: ["superadmin"],
 
-    disable: true
+    disable: false
   };
 
   // 表单规则
